@@ -1,0 +1,83 @@
+<form [formGroup]="userForm">
+  <h1>Enter User Details</h1>
+  <div class="f-left w-50">
+    <fieldset>
+      <legend>Profile</legend>
+      <label for="name">Name:</label>
+      <input type="text" id="name" formControlName="name">
+      <div class="error" *ngIf="isFieldInvalid('name')" class="error-message">
+        <span *ngIf="userForm.get('name').errors?.required">Name is required.</span>
+      </div>
+
+      <label for="username">Username:</label>
+      <input type="text" id="username" formControlName="username">
+      <div class="error" *ngIf="isFieldInvalid('username')" class="error-message">
+        <span *ngIf="userForm.get('username').errors?.required">Username is required.</span>
+      </div>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email">
+      <div class="error" *ngIf="isFieldInvalid('email')" class="error-message">
+        <span *ngIf="userForm.get('email').errors?.required">Email is required.</span>
+        <span *ngIf="userForm.get('email').errors?.email">Invalid email format.</span>
+      </div>
+
+      <label for="website">Website:</label>
+      <input type="email" id="website" formControlName="website">
+
+      <label for="phone">Phone:</label>
+      <input type="number" id="phone" formControlName="phone">
+    </fieldset>
+
+    <fieldset formGroupName="company">
+      <legend>Company</legend>
+      <label for="company_name">Name:</label>
+      <input type="text" id="company_name" formControlName="name">
+
+      <label for="catchPhrase">Catch Phrase:</label>
+      <input type="text" id="catchPhrase" formControlName="catchPhrase">
+
+      <label for="bs">BS:</label>
+      <input type="text" id="bs" formControlName="bs">
+    </fieldset>
+
+    <fieldset formGroupName="address">
+      <legend>Address</legend>
+      <label for="street">Street:</label>
+      <input type="text" id="street" formControlName="street">
+
+      <label for="suite">Suite:</label>
+      <input type="text" id="suite" formControlName="suite">
+
+      <label for="city">City:</label>
+      <input type="text" id="city" formControlName="city">
+
+      <label for="zipcode">Zipcode:</label>
+      <input type="number" id="zipcode" formControlName="zipcode">
+
+      <fieldset formGroupName="geo">
+        <legend>Geo</legend>
+        <div class="f-left w-40">
+          <label for="lat">Lat:</label>
+          <input type="text" id="lat" formControlName="lat">
+        </div>
+        <div class="f-right w-40">
+          <label for="lng">Lng:</label>
+          <input type="text" id="lng" formControlName="lng">
+        </div>
+      </fieldset>
+    </fieldset>
+  </div>
+
+</form>
+<button [disabled]="this.userForm.status === 'INVALID'" class="green" (click)="onSubmit()">Create</button>
+<button class="green"  (click)="getUserList()">Get Users</button>
+<button class="green"  (click)="clear()">clear</button>
+<h4>RESPONSE</h4> 
+<span>
+  {{userData|json}}
+</span>
+<hr/>
+<span>
+  {{userList|json}}
+</span>
