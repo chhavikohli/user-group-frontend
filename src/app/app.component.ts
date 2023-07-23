@@ -54,11 +54,11 @@ export class AppComponent implements OnInit {
     // Handle form submission here
     const url = 'users/create';
     const payload = this.userForm.value;
+    this.userData = payload;
     this.http.post(url, payload).subscribe(response => {
       if (!response.success) {
         this.handleError(response);
       } else {
-        this.userData = response.data;
         alert(`Data Saved`);
       }
     })
